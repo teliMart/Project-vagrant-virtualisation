@@ -1,0 +1,106 @@
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+
+  form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="date"],
+  input[type="tel"],
+  select {
+    width: calc(100% - 12px);
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 14px;
+  }
+
+  button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="text-center mb-4">
+            <b style="font-family: Arial, sans-serif">Modifier Employé</b>
+          </h2>
+          <form method="post">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+              <label for="nom" class="form-label">Nom:</label>
+              <input type="text" id="nom" name="nom" class="form-control" value="{{ employee.nom }}" required>
+            </div>
+            
+            <div class="mb-3">
+              <label for="prenom" class="form-label">Prénom:</label>
+              <input type="text" id="prenom" name="prenom" class="form-control" value="{{ employee.prenom }}" required>
+            </div>
+            
+            <div class="mb-3">
+              <label for="email" class="form-label">Téléphone:</label>
+              <input type="text" id="tel" name="tel" class="form-control" value="{{ employee.tel }}" required>
+            </div>
+            
+            <div class="mb-3">
+              <label for="date_naissance" class="form-label">Date de Naissance:</label>
+              <input type="date" id="date_nais" name="date_nais" class="form-control" value="{{ employee.date_nais }}">
+            </div>
+            
+            <div class="mb-3">
+              <label for="date_embauche" class="form-label">Date d'embauche:</label>
+              <input type="date" id="date_empl" name="date_empl" class="form-control" value="{{ employee.date_empl }}" required>
+            </div>
+            
+            <div class="mb-3">
+              <label for="poste" class="form-label">Poste:</label>
+              <select id="poste" name="poste" class="form-select">
+                <option value="manager" {% if employee.poste == "manager" %} selected {% endif %}>Manager</option>
+                <option value="developer" {% if employee.poste == "developer" %} selected {% endif %}>Developer</option>
+                <option value="designer" {% if employee.poste == "designer" %} selected {% endif %}>Designer</option>
+                <option value="analyst" {% if employee.poste == "analyst" %} selected {% endif %}>Analyst</option>
+              </select>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Modifier Employé</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

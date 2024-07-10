@@ -1,0 +1,158 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+
+<h2 style="text-align: center">Liste des Employés</h2>
+
+<!-- Styling the employee list -->
+<div
+  class="employee-list"
+  style="margin: 0 auto; text-align: left; max-width: 600px"
+>
+  {% for employee in page_obj %}
+  <div class="employee-item">
+    <p>
+      <strong>{{ employee.nom }} {{ employee.prenom }}</strong> -
+      {{employee.poste }}
+    </p>
+    <!-- Afficher d'autres détails de l'employé si nécessaire -->
+    <a class="btn btn-primary" href="{% url 'view_employee' employee.id %}"
+      >Voir détails</a
+    >
+  </div>
+  <hr />
+  {% endfor %}
+</div>
+
+<!-- Pagination -->
+<div class="pagination" style="text-align: center">
+  <span class="step-links">
+    {% if page_obj.has_previous %}
+    <a class="btn btn-outline-secondary" href="?page=1">&laquo; Première</a>
+    <a
+      class="btn btn-outline-secondary"
+      href="?page={{ page_obj.previous_page_number }}"
+      >Précédente</a
+    >
+    {% endif %}
+
+    <span class="current">
+      Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}.
+    </span>
+
+    {% if page_obj.has_next %}
+    <a
+      class="btn btn-outline-secondary"
+      href="?page={{ page_obj.next_page_number }}"
+      >Suivante</a
+    >
+    <a
+      class="btn btn-outline-secondary"
+      href="?page={{ page_obj.paginator.num_pages }}"
+      >Dernière &raquo;</a
+    >
+    {% endif %}
+  </span>
+</div>
+
+<!-- Styling CSS (sample) -->
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+
+  .employee-list {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .employee-item {
+    margin-bottom: 10px;
+  }
+
+  .btn {
+    text-decoration: none;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 3px;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .btn-outline-secondary {
+    background-color: transparent;
+    border: 1px solid #6c757d;
+    color: #6c757d;
+  }
+
+  .pagination {
+    margin-top: 20px;
+  }
+
+  .step-links {
+    display: inline-block;
+  }
+
+  .current {
+    margin: 0 10px;
+  }
+</style>
+
+{% endblock content %}
+<!-- Styling CSS (sample) -->
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  .employee-list {
+    margin-bottom: 20px;
+    max-width: 600px; /* Taille maximale de la liste des employés */
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .employee-item {
+    margin-bottom: 10px;
+  }
+
+  .btn {
+    text-decoration: none;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 3px;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .btn-outline-secondary {
+    background-color: transparent;
+    border: 1px solid #6c757d;
+    color: #6c757d;
+  }
+
+  .pagination {
+    margin-top: 20px;
+  }
+
+  .step-links {
+    display: inline-block;
+  }
+
+  .current {
+    margin: 0 10px;
+  }
+</style>
