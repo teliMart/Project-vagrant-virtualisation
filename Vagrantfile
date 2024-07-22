@@ -3,7 +3,7 @@ Vagrant.configure("2") do |config|
   # Configuration du serveur d'application
   config.vm.define "app_server" do |app|
     app.vm.box = "ubuntu/bionic64"
-    app.vm.network "private_network", ip: "192.168.33.10"
+    app.vm.network "private_network", ip: "192.168.33.13"
     app.vm.synced_folder ".", "/vagrant", disabled: true
     app.vm.provider "virtualbox" do |vb|
       vb.memory = "2048"
