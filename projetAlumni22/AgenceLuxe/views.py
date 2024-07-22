@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, render, HttpResponseRedirect, re
 from .models import *
 from django.contrib import messages
 from django.contrib.auth import *
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view # type: ignore
 import json
 from django.core.paginator import Paginator
 from .serializers import *

@@ -25,7 +25,7 @@ SECRET_KEY = '^3&&&!%xk3npny=238rby0n2^h=ztdu=2lo3!0zk80!(3wdw&u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.33.10', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['192.168.33.10','192.168.33.11','localhost','127.0.0.1']
 
 
 # Application definition
@@ -86,7 +86,7 @@ DATABASES = {
          'NAME': 'myproject',
          'USER': 'vagrant',
          'PASSWORD': 'password',
-         'HOST': '192.168.33.11',  # IP de votre serveur PostgreSQL
+         'HOST': '192.168.33.12',  # IP de votre serveur PostgreSQL
          'PORT': '5432',
      }
  }
