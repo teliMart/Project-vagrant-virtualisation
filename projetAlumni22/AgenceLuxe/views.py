@@ -61,7 +61,7 @@ def delete_employee(request, id):
     employee.delete()
     
     messages.success(request, "Employee deleted successfully!")
-    return redirect('employee_list')
+    return redirect('liste_employee')
 
 def employee_list(request):
     employees = Employe.objects.all()
@@ -75,16 +75,30 @@ def view_employee(request, id):
     employee = get_object_or_404(Employe, id=id)
     return render(request, 'view_employee.html', {'employee': employee})
 
+
+
+
+from django.shortcuts import render, redirect
+from .forms import RegistrationForm
+
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegistrationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('login')
+            # Création de l'utilisateur
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            return redirect('login')  # Redirection vers la page de connexion après l'inscription
+        else:
+            return render(request, 'register.html', {'form': form})
     else:
-        form = UserCreationForm()
+        form = RegistrationForm()
     return render(request, 'register.html', {'form': form})
+
+
+
+
 
 def login_view(request):
     if request.method == 'POST':

@@ -4,14 +4,14 @@ from .views import *
 
 
 urlpatterns = [
-    path('', acceuil, name='employee'),
+    path('login/', acceuil, name='employee'),
     path('employee/detail/<int:id>/', view_employee, name='view_employee'),
     path('addemployee/', add_employee, name='add_employee'),
     path('editemployee/<int:id>/', edit_employee, name='edit_employee'),
     path('listemployee/', employee_list, name='liste_employee'),
     path('deleteemployee/<int:id>/', delete_employee, name='delete_employee'),
     path('register/', register, name='register'),
-    path('login/', login_view, name='login'),
+    path('', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
 
 ]
