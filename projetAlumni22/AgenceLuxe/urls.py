@@ -10,4 +10,8 @@ urlpatterns = [
     path('editemployee/<int:id>/', edit_employee, name='edit_employee'),
     path('listemployee/', employee_list, name='liste_employee'),
     path('deleteemployee/<int:id>/', delete_employee, name='delete_employee'),
+    path('register/', register, name='register'),
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
+
 ]
