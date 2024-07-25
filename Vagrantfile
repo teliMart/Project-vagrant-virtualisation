@@ -2,8 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-
-
+  
   # Configuration du serveur d'application
   config.vm.define "app_server" do |app|
     app.vm.box = "ubuntu/bionic64"
