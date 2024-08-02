@@ -2,12 +2,19 @@ from django.shortcuts import get_object_or_404, render, HttpResponseRedirect, re
 from .models import *
 from django.contrib import messages
 from django.contrib.auth import *
+<<<<<<< HEAD
 from rest_framework.decorators import api_view # type: ignore
 import json
 from django.core.paginator import Paginator
 from .serializers import *
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+=======
+from rest_framework.decorators import api_view
+import json
+from django.core.paginator import Paginator
+from .serializers import *
+>>>>>>> 286a8375ba18b5139a39fb333bde7a1c72e528c1
 
 
 def acceuil(request):
@@ -61,7 +68,11 @@ def delete_employee(request, id):
     employee.delete()
     
     messages.success(request, "Employee deleted successfully!")
+<<<<<<< HEAD
     return redirect('liste_employee')
+=======
+    return redirect('employee_list')
+>>>>>>> 286a8375ba18b5139a39fb333bde7a1c72e528c1
 
 def employee_list(request):
     employees = Employe.objects.all()
@@ -75,6 +86,7 @@ def view_employee(request, id):
     employee = get_object_or_404(Employe, id=id)
     return render(request, 'view_employee.html', {'employee': employee})
 
+<<<<<<< HEAD
 
 
 
@@ -116,5 +128,7 @@ def logout_view(request):
         logout(request)
         return redirect('login')
 
+=======
+>>>>>>> 286a8375ba18b5139a39fb333bde7a1c72e528c1
             
  
