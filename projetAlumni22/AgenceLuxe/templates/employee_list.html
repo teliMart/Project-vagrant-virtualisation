@@ -1,239 +1,57 @@
+{% extends 'base.html' %} {% block content %}
 
-
-            <!-- Container fluid -->
-            <div class="bg-primary pt-10 pb-21"></div>
-            <div class="container-fluid mt-n22 px-6">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-12">
-                        <!-- Page header -->
-                        <div>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="mb-2 mb-lg-0">
-                                    <h3 class="mb-0  text-white">Projects</h3>
-                                </div>
-                                <div>
-                                    <a href="#" type="button" data-bs-toggle="modal" data-bs-target=".gd-example-modal-lg" class="btn btn-white">Nouveau Employé</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-12 col-12 mt-6">
-                        <!-- card -->
-                        <div class="card ">
-                            <!-- card body -->
-                            <div class="card-body">
-                                <!-- heading -->
-                                <div class="d-flex justify-content-between align-items-center
-                    mb-3">
-                                    <div>
-                                        <h4 class="mb-0">Manager</h4>
-                                    </div>
-                                    <div class="icon-shape icon-md bg-light-primary text-primary
-                      rounded-2">
-                                        <i class="bi bi-briefcase fs-4"></i>
-                                    </div>
-                                </div>
-                                <!-- project number -->
-                                <div>
-                                    <h1 class="fw-bold">18</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-12 col-12 mt-6">
-                        <!-- card -->
-                        <div class="card ">
-                            <!-- card body -->
-                            <div class="card-body">
-                                <!-- heading -->
-                                <div class="d-flex justify-content-between align-items-center
-                    mb-3">
-                                    <div>
-                                        <h4 class="mb-0">Developer</h4>
-                                    </div>
-                                    <div class="icon-shape icon-md bg-light-primary text-primary
-                      rounded-2">
-                                        <i class="bi bi-list-task fs-4"></i>
-                                    </div>
-                                </div>
-                                <!-- project number -->
-                                <div>
-                                    <h1 class="fw-bold">12</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-12 col-12 mt-6">
-                        <!-- card -->
-                        <div class="card ">
-                            <!-- card body -->
-                            <div class="card-body">
-                                <!-- heading -->
-                                <div class="d-flex justify-content-between align-items-center
-                    mb-3">
-                                    <div>
-                                        <h4 class="mb-0">Analyst</h4>
-                                    </div>
-                                    <div class="icon-shape icon-md bg-light-primary text-primary
-                      rounded-2">
-                                        <i class="bi bi-people fs-4"></i>
-                                    </div>
-                                </div>
-                                <!-- project number -->
-                                <div>
-                                    <h1 class="fw-bold">12</h1>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-12 col-12 mt-6">
-                        <!-- card -->
-                        <div class="card ">
-                            <!-- card body -->
-                            <div class="card-body">
-                                <!-- heading -->
-                                <div class="d-flex justify-content-between align-items-center
-                    mb-3">
-                                    <div>
-                                        <h4 class="mb-0">Designer</h4>
-                                    </div>
-                                    <div class="icon-shape icon-md bg-light-primary text-primary
-                      rounded-2">
-                                        <i class="bi bi-bullseye fs-4"></i>
-                                    </div>
-                                </div>
-                                <!-- project number -->
-                                <div>
-                                    <h1 class="fw-bold">7</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- row  -->
-                <div class="row mt-6">
-                    <div class="col-md-12 col-12">
-                        <!-- card  -->
-                        <div class="card">
-                            <!-- card header  -->
-                            <div class="card-header bg-white  py-4">
-                                <h4 class="mb-0">Liste des employés</h4>
-                            </div>
-                            <!-- table  -->
-                            <div class="table-responsive">
-                                <table class="table text-nowrap mb-0">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th>Nom</th>
-                                            <th>Prénom</th>
-                                            <th>Date de naissance</th>
-                                            <th>Fonction</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                      {% for employee in page_obj %}
-                                          <tr>
-                                              <td class="align-middle">
-                                                  <div class="d-flex align-items-center">
-                                                      <div>
-                                                        
-                                                      </div>
-                                                      <div class="ms-3 lh-1">
-                                                          <h5 class=" mb-1"> <a href="#" class="text-inherit">{{ employee.nom }}</a></h5>
-
-                                                      </div>
-                                                  </div>
-                                              </td>
-                                              <td class="align-middle">{{ employee.prenom }}</td>
-                                              <td class="align-middle"><span class="badge bg-warning">{{ employee.date_nais }}</span></td>
-                                              <td class="align-middle">
-                                                  <div class="avatar-group">
-                                                      <span class="avatar avatar-sm">{{ employee.poste }}</span>
-                                                  </div>
-                                              </td>
-                                          </tr>  
-                                        {% endfor %}                            
-                                            
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- card footer  -->
-                            <div class="card-footer bg-white text-center">
-                                <a href="#" class="link-primary">View All Projects</a>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Add Employé modal -->
-    <div class="modal fade gd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          
-          <div class="card-body p-6">
-
-            <!-- Form -->
-            <form action="{% url 'add_employee' %}" method="post">
-              {% csrf_token %}
-              <!-- Nom -->
-              <div class="mb-3">
-                <label for="nom" class="form-label">Nom</label>
-                <input type="text" id="nom" class="form-control" name="nom" placeholder="Nom" required="">
-              </div>
-              <!-- Prenom -->
-              <div class="mb-3">
-                <label for="prenom" class="form-label">Prenom</label>
-                <input type="prenom" id="prenom" class="form-control" name="prenom" placeholder="prenom" required="">
-              </div>
-              <!-- Password -->
-              <div class="mb-3">
-                <label for="date_nais" class="form-label">Date de naissance</label>
-                <input type="date" id="date_nais" class="form-control" name="date_nais" placeholder="Date de naissance" required="">
-              </div>
-              <!-- Password -->
-              <div class="mb-3">
-                <label for="tel" class="form-label">Téléphone</label>
-                <input type="number" id="tel" class="form-control" name="tel" placeholder="Téléphone" required="">
-              </div>
-              <div class="mb-3">
-                <label for="date_empl" class="form-label">Date d'embauche:</label>
-                <input
-                  type="date"
-                  id="date_empl"
-                  name="date_empl"
-                  class="form-control"
-                  required
-                />
-              </div>
-  
-              <div class="mb-3">
-                <label for="poste" class="form-label">Poste:</label>
-                <select id="poste" name="poste" class="form-select">
-                  <option value="manager">Manager</option>
-                  <option value="developer">Developer</option>
-                  <option value="designer">Designer</option>
-                  <option value="analyst">Analyst</option>
-                </select>
-              </div>
-              <div>
-                <!-- Button -->
-                <div class="d-grid">
-                  <button type="submit" class="btn btn-primary">
-                    Ajouter Employé
-                  </button>
-                </div>
-              </div>
-
-            </form>
+      <div class="card">
+          <!-- card header  -->
+          <div class="card-header bg-white  py-4">
+              <h4 class="mb-0">Liste des employés</h4>
           </div>
+          <!-- table  -->
+          <div class="table-responsive">
+              <table class="table text-nowrap mb-0">
+                  <thead class="table-light">
+                      <tr>
+                          <th>Nom</th>
+                          <th>Prénom</th>
+                          <th>Date de naissance</th>
+                          <th>Fonction</th>
+                          <th>Actions</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    {% for employee in page_obj %}
+                        <tr>
+                            <td class="align-middle">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                      
+                                    </div>
+                                    <div class="ms-3 lh-1">
+                                        <h5 class=" mb-1"> <a href="#" class="text-inherit">{{ employee.nom }}</a></h5>
 
-        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="align-middle">{{ employee.prenom }}</td>
+                            <td class="align-middle"><span class="badge bg-warning">{{ employee.date_nais }}</span></td>
+                            <td class="align-middle">
+                                <div class="avatar-group">
+                                    <span class="avatar avatar-sm">{{ employee.poste }}</span>
+                                </div>
+                            </td>
+                            <td class="align-middle">
+                              <a class="btn btn-primary" href="{% url 'view_employee' employee.id %}"
+                              >Voir détails</a
+                            >
+                          </td>
+                        </tr>  
+                      {% endfor %}                            
+                          
+                  </tbody>
+              </table>
+          </div>
+    
       </div>
-    </div>
 
+
+
+{% endblock content %}
