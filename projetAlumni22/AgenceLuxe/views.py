@@ -3,40 +3,60 @@ from .models import *
 from django.contrib import messages
 from django.contrib.auth import *
 from rest_framework.decorators import api_view # type: ignore
-import json
+from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from .serializers import *
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.db.models import Count
 
-
-def acceuil(request):
+def accueil(request):
+    employes_par_poste = Employe.objects.values('poste').annotate(total=Count('poste')).order_by('poste')
+    employees = Employe.objects.all()
+    paginator = Paginator(employees, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    # Créer un dictionnaire avec le nombre d'employés par poste
+    employes_count = {item['poste']: item['total'] for item in employes_par_poste}
     
-   
-    return render(request, 'home.html')
+    context = {
+        'employes_count': employes_count,
+        'page_obj': page_obj
+    }
+    
+    return render(request, 'home.html', context)
 
 
 def add_employee(request):
-    if request.method == "POST":
-        nom = request.POST.get('nom')
-        prenom = request.POST.get('prenom')
-        date_nais = request.POST.get('date_nais')
-        tel = request.POST.get('tel')
-        date_empl = request.POST.get('date_empl')
-        poste = request.POST.get('poste')
-        
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        nom = request.POST['nom']
+        prenom = request.POST['prenom']
+        date_nais = request.POST['date_nais']
+        tel = request.POST['tel']
+        date_empl = request.POST['date_empl']
+        poste = request.POST['poste']
+        photo = request.FILES.get('photo', 'image/person-circle.svg')  # Default image if no file uploaded
+
+        # Créer l'utilisateur
+        user = User.objects.create_user(username=username, email=email, password=password)
+
+        # Créer l'employé
         Employe.objects.create(
+            user_id=user,
             nom=nom,
             prenom=prenom,
             date_nais=date_nais,
             tel=tel,
             date_empl=date_empl,
-            poste=poste
-        )
+            poste=poste,
+            photo=photo
+        ) 
+        messages.success(request, "Employé ajouté avec succès!")
+        return redirect('employee') 
         
-        messages.success(request, "Employee added successfully!")
-        return redirect('liste_employee')
-    
     return render(request, 'add_employee.html')
 
 def edit_employee(request, id):
@@ -111,10 +131,54 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
-def logout_view(request):
-    if request.method == 'POST':
-        logout(request)
-        return redirect('login')
 
-            
+    
+    
+def inscrireuser(request):
+     if request.method == 'POST':
+         username = request.POST['username']
+         lastname = request.POST['last_name']
+         firstname = request.POST['first_name']
+         email= request.POST['email']
+         password = request.POST['password'] 
+         if User.objects.filter(username=username).exists():
+                messages.error(request,"Le INE que vous avez saisi existe déjà. Vous ne pouvez plus créer de compte avec le même INE ")
+                return redirect('register')
+         else:
+                if User.objects.filter(email=email).exists():
+                    messages.error(request,"L'adresse email que vous avez entré existe déjà ")
+                    return redirect('register')
+                else:
+                    
+                        mon_user = User.objects.create_user(username, email, password)
+                        mon_user.first_name = firstname
+                        mon_user.last_name = lastname
+                        mon_user.save()
+                        messages.success(request, 'votre compte a été crée avec succès')
+                        return redirect('logins')
+                  
+     else:
+         
+        return render(request, 'register.html')
+    
+    
+def connecter(request):
+    if request.method == 'POST':
+         username = request.POST['username'],
+         passwor = request.POST['password'],
+         use= authenticate(username=request.POST['username'], password=request.POST['password'])
+         if use is not None:
+             login(request, use)
+             nom = User.id
+             messages.success(request, 'Vous êtes connecté!!!!')
+             return redirect('employee')
+         else:
+            messages.error(request,'Connection impossible')
+            return redirect('login')
+    return render(request, 'login.html')
+
+def deconnecter(request):
+    logout(request)
+    messages.success(request, 'votre compte a été deconnecté')
+    return redirect('login')       
  
