@@ -9,6 +9,8 @@ from .serializers import *
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.db.models import Count
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 def accueil(request):
     employes_par_poste = Employe.objects.values('poste').annotate(total=Count('poste')).order_by('poste')
@@ -38,7 +40,7 @@ def add_employee(request):
         tel = request.POST['tel']
         date_empl = request.POST['date_empl']
         poste = request.POST['poste']
-        photo = request.FILES.get('photo', 'image/person-circle.svg')  # Default image if no file uploaded
+        # photo = request.FILES.get('photo', 'image/person-circle.svg')  # Default image if no file uploaded
 
         # Créer l'utilisateur
         user = User.objects.create_user(username=username, email=email, password=password)
@@ -52,7 +54,7 @@ def add_employee(request):
             tel=tel,
             date_empl=date_empl,
             poste=poste,
-            photo=photo
+            # photo=photo
         ) 
         messages.success(request, "Employé ajouté avec succès!")
         return redirect('employee') 
@@ -180,5 +182,17 @@ def connecter(request):
 def deconnecter(request):
     logout(request)
     messages.success(request, 'votre compte a été deconnecté')
-    return redirect('login')       
+    return redirect('login')   
+
+def view_employee_profile(request):
+    employee = get_object_or_404(Employe, user_id=request.user)
+    return render(request, 'employee_profile.html', {'employee': employee})    
  
+def maj_employee(request, employee_id):
+    employee = get_object_or_404(Employe, id=employee_id)
+    if request.method == 'POST':
+        employee.photo = request.FILES.get('photo', employee.photo)
+        employee.cv = request.FILES.get('cv', employee.cv)
+        employee.save()
+        return redirect('view_employee_profile')
+    return render(request, 'maj_employee.html', {'employee': employee})

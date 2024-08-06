@@ -45,7 +45,7 @@
          <!-- Nav item -->
          
 
-                                         <!-- Nav item -->
+         {% if user.is_superuser %}                <!-- Nav item -->
                         <li class="nav-item">
                             <div class="navbar-heading">Gestion des employés</div>
                         </li>
@@ -59,12 +59,21 @@
                          </li>
                          <li class="nav-item">
                           <a class="nav-link has-arrow " href="{% url 'liste_employee' %}" >
-                            <i data-feather="clipboard" class="nav-icon icon-xs me-2" >
+                            <i data-feather="list" class="nav-icon icon-xs me-2" >
                         </i>   Liste des employés
                         </a>
                          </li>
-
-
+           {% else %}
+           <li class="nav-item">
+            <div class="navbar-heading">Gestion de profile</div>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-primary" href="{% url 'view_employee_profile' %}"> 
+              <i data-feather="list" class="nav-icon icon-xs me-2"></i> Voir son profil
+            </a>
+          </li>
+          
+          {% endif %}
 
 
                     </ul>
@@ -115,45 +124,34 @@
             {% if user.is_authenticated %}
             <div class="lh-1 ">
               <h5 class="mb-1"> {{ user.email }} {{ user.last_name }}</h5>
-              <a href="#" class="text-inherit fs-6">View my profile</a>
+       
             </div>
             <div class=" dropdown-divider mt-3 mb-2"></div>
           </div>
 
           <ul class="list-unstyled">
-
+            {% if user.is_superuser %} 
             <li>
               <a class="dropdown-item" href="#">
+                <i class="me-2 icon-xxs dropdown-item-icon" data-feather="user"></i>
+              Bienvenue  Administrateur
+              </a>
+            </li>
+            {% else %}
+         
+            <li>
+              <a class="dropdown-item" href="{% url 'view_employee_profile' %}">
                 <i class="me-2 icon-xxs dropdown-item-icon" data-feather="user"></i>Edit
                 Profile
               </a>
             </li>
-            <li>
-              <a class="dropdown-item"
-                href="#">
-                <i class="me-2 icon-xxs dropdown-item-icon"
-                  data-feather="activity"></i>Activity Log
-              </a>
+            {% endif %}
 
-
-            </li>
-
-            <li>
-              <a class="dropdown-item text-primary" href="#">
-                <i class="me-2 icon-xxs text-primary dropdown-item-icon"
-                  data-feather="star"></i>Go Pro
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">
-                <i class="me-2 icon-xxs dropdown-item-icon"
-                  data-feather="settings"></i>Account Settings
-              </a>
-            </li>
+     
             <li>
               <a class="dropdown-item" href="{% url 'logout' %}">
                 <i class="me-2 icon-xxs dropdown-item-icon"
-                  data-feather="power"></i>Sign Out
+                  data-feather="power"></i>Se déconnecter
               </a>
             </li>
           </ul>
@@ -167,14 +165,14 @@
     {% for mssg in messages %} {{mssg}} {% endfor %}
     <br />
     {% block content %} {% endblock content %}
-
-    <footer class="blog-footer">
+<br><br><br><br>
+    <footer class="blog-footer text-center">
       <p>
-        S.G.E <a href="">Groupe 9</a>
-        <a href="">Projet Virtualisation IBAM Master 1 2024</a>.
+        S.G.E <a href="#">Groupe 9</a>
+        <a href="#">Projet Virtualisation IBAM Master 1 2024</a>.
       </p>
     </footer>
-
+    
 
     <!-- Scripts -->
      <!-- Libs JS -->

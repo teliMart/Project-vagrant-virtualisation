@@ -16,15 +16,16 @@
           <strong>Poste:</strong> {{ employee.poste }}<br />
         </p>
         <a href="{% url 'edit_employee' employee.id %}" class="btn btn-primary btn-lg me-2">Modifier</a>
-        <a href="{% url 'delete_employee' employee.id %}" class="btn btn-danger btn-lg">Supprimer</a>
+        <a href="{% url 'maj_employee' employee.id %}" class="btn btn-warning btn-lg me-2">Mettre à jour</a>
         <button type="button" class="btn btn-info btn-lg" data-bs-toggle="modal" data-bs-target="#cvModal">Voir mon CV</button>
       </div>
       <div class="ms-auto">
-        <img src="{{ employee.photo.url }}" alt="Image de profil" class="rounded-circle" style="width: 150px; height: 150px;">
+        <img src="{{ employee.photo.url }}" alt="Image de profil" class="img-fluid" style="border-radius: 20px; width: 150px; height: 150px;">
       </div>
     </div>
   </div>
 </div>
+
 <!-- Modal -->
 <div class="modal fade" id="cvModal" tabindex="-1" aria-labelledby="cvModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -42,6 +43,4 @@
     </div>
   </div>
 </div>
-
-
 {% endblock content %}
