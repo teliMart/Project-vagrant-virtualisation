@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">Mettre à jour les informations de l'employé</h2>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="photo" class="form-label">Photo de profil</label>
+      <input type="file" class="form-control" id="photo" name="photo">
+    </div>
+    <div class="mb-3">
+      <label for="cv" class="form-label">CV</label>
+      <input type="file" class="form-control" id="cv" name="cv">
+    </div>
+    <button type="submit" class="btn btn-primary">Mettre à jour</button>
+  </form>
+</div>
+{% endblock content %}

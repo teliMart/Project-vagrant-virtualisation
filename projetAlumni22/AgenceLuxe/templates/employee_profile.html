@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="card" style="width: 60%; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <div class="card-body d-flex align-items-start">
+      <div>
+        <h5 class="card-title display-4 text-dark fw-bold">
+          {{ employee.nom }} {{ employee.prenom }}
+        </h5>
+        <p class="card-text fs-5 text-dark fw-bold">
+          <strong>Nom d'utilisateur:</strong> {{ employee.user_id.username }}<br />
+          <strong>Email:</strong> {{ employee.user_id.email }}<br />
+          <strong>Date de naissance:</strong> {{ employee.date_nais }}<br />
+          <strong>Téléphone:</strong> {{ employee.tel }}<br />
+          <strong>Date d'embauche:</strong> {{ employee.date_empl }}<br />
+          <strong>Poste:</strong> {{ employee.poste }}<br />
+        </p>
+        <a href="{% url 'edit_employee' employee.id %}" class="btn btn-primary btn-lg me-2">Modifier</a>
+        <a href="{% url 'maj_employee' employee.id %}" class="btn btn-warning btn-lg me-2">Mettre à jour</a>
+        <button type="button" class="btn btn-info btn-lg" data-bs-toggle="modal" data-bs-target="#cvModal">Voir mon CV</button>
+      </div>
+      <div class="ms-auto">
+        <img src="{{ employee.photo.url }}" alt="Image de profil" class="img-fluid" style="border-radius: 20px; width: 150px; height: 150px;">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="cvModal" tabindex="-1" aria-labelledby="cvModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cvModalLabel">Mon CV</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="{{ employee.cv.url }}" alt="CV" class="img-fluid">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
