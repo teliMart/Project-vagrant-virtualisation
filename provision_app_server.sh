@@ -18,3 +18,8 @@ sudo pip3 install djangorestframework
 sudo pip3 install django-phonenumber-field
 sudo pip3 install psycopg2
 
+# Installer les dépendances supplémentaires pour Pillow
+sudo apt-get install -y zlib1g-dev libjpeg-dev libpng-dev libfreetype6-dev liblcms2-dev libopenjp2-7-dev libtiff5-dev tk-dev tcl-dev
+
+# Installer Pillow
+python3 -m pip install Pillow
